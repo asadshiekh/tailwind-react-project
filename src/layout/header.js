@@ -1,17 +1,22 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Logo from '../assets/Logo.png';
 
 function Header() {
+  const [isDarkMode, setIsDarkMode] = useState(false);
 
+  const handleToggle = () => {
+    setIsDarkMode(!isDarkMode);
+  };
 
   return (
     <>
-      <section className="navbar md:flex justify-between items-center py-5 hidden">
+   <section className={`${isDarkMode ? 'bg-black' : 'bg-white'} navbar md:flex justify-between items-center py-5 hidden`}>
+   
         <div className="logo">
           <img src={Logo} alt="logo" />
         </div>
         <div className="nav-links">
-          <ul className="flex list-none">
+          <ul className={`${isDarkMode ? 'text-white' : 'text-black'} flex list-none`}>
             <li className="mr-5">Home</li>
             <li className="mr-5">Blog</li>
             <li className="mr-5">Single Post</li>
@@ -36,10 +41,10 @@ function Header() {
             </div>
           </div>
           <div className='toggle'>
-            <label class="relative inline-flex items-center cursor-pointer">
-                <input type="checkbox" value="" class="sr-only peer"></input>
-                <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
-              </label>
+            <label className="relative inline-flex items-center cursor-pointer">
+              <input type="checkbox" onChange={handleToggle} className="sr-only peer"></input>
+              <div className={`w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer ${isDarkMode ? 'dark:bg-gray-700' : ''} peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all ${isDarkMode ? 'dark:border-gray-600 peer-checked:bg-blue-600' : ''}`}></div>
+            </label>
           </div>
         </div>
       </section>
@@ -49,10 +54,11 @@ function Header() {
           <img src={Logo} alt="logo" />
         </div>
         <div className='menu'>
-        <svg fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M4 6H20M4 12H20M4 18H20" stroke="#4A5568" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/></svg>
+          <svg fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M4 6H20M4 12H20M4 18H20" stroke="#4A5568" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" />
+          </svg>
         </div>
       </section>
-
     </>
   );
 }
