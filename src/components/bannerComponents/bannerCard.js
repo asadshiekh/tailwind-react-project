@@ -1,11 +1,12 @@
 import React from 'react';
 import AuthorImage from '../../assets/author.png'
-function bannerCard() {
-  
+function bannerCard({card_data}) {
+
   return (
     <>
+
       <section className=' banner-card left-0 w-100 md:w-2/6  bottom-0 md:rounded md:shadow-lg bg-white md:-bottom-20 md:left-8 absolute' style={{padding:'20px'}}>
-          <lable className='bg-blue-500 text-sm rounded p-1 inline-block mb-2 text-white'>Techonolgy</lable>
+      <label className='bg-blue-500 text-sm rounded p-1 inline-block mb-2 text-white'>Techonolgy</label>
           <p className='sm:text-[16px] md:text-[25px] font-medium'>The Impact of Technology on the Workplace: How Technology is Changing</p>
           <div className='author_banner'>
             <div className='author_img flex items-center rounded-full w-100 h-8 mt-3 object-cover'>
@@ -15,6 +16,8 @@ function bannerCard() {
             </div>
           </div>
       </section>
+      
+     
     </>
   )
 }

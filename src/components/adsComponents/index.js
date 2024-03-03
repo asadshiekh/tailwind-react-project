@@ -1,12 +1,13 @@
 import React from 'react'
 import AdsBlock from './adsBlock';
 
-function index() {
+function Index() {
+
   return (
     <>
-      <AdsBlock/>
+          <AdsBlock/>
     </>
   )
 }
 
-export default index
+export default Index

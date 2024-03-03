@@ -4,17 +4,7 @@ import LogoWhite from '../assets/Logo-white.png';
 import {useTheme} from '../ThemeContent';
 import { Link } from 'react-router-dom';
 function Header() {
-  const { isDarkMode,toggleDarkMode,isLoggedIn,logout} = useTheme();
-
-  // alert(isLoggedIn);
-
-  const handleLogout = () => {
-    console.log('before',isLoggedIn);
-    logout(); // Call the logout function to update the isLoggedIn state
-    console.log('after',isLoggedIn);
-  };
-
-
+  const { isDarkMode, toggleDarkMode } = useTheme();
 
   return (
     <>
@@ -29,22 +19,11 @@ function Header() {
         </div>
         <div className="nav-links">
           <ul className={`${isDarkMode ? 'text-white' : 'text-black'} flex list-none`}>
-            <li className="mr-3"><Link to="/">Home</Link></li>
-            <li className="mr-3"><Link to="/blogs">Blog</Link></li>
-            <li className="mr-3"><Link to="/single-page">Posts</Link></li>
-            <li className="mr-3"><Link to="/">Pages</Link></li>
-            {isLoggedIn === "1" ? (
-              <>
-                <li className="mr-3"><Link to="/">Add Blog</Link></li>
-                <button onClick={handleLogout}>Logout</button>
-              </>
-            ) : (
-              <>
-                <li className="mr-3"><Link to="/contact">Register</Link></li>
-                <li className="mr-3"><Link to="/login">Login</Link></li>
-              </>
-            )}
-
+            <li className="mr-5"><Link to="/">Home</Link></li>
+            <li className="mr-5"><Link to="/blogs">Blog</Link></li>
+            <li className="mr-5"><Link to="/single-page">Single Post</Link></li>
+            <li className="mr-5"><Link to="/">Pages</Link></li>
+            <li><Link to="/contact">Contact</Link></li>
           </ul>
         </div>
         <div className="search flex items-center">
