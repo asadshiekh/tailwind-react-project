@@ -17,20 +17,26 @@ const [error_message, setErrorMessage] = useState("");
  const navigate = useNavigate();
 
 const handleSubmit = async (e) => {
-    console.log(isLoggedIn);  
+  console.log(process.env.REACT_APP_API_URL);  
+  console.log(isLoggedIn);  
      e.preventDefault();
      setLoading(true);
     try {
-        const response = await axios.post('http://localhost:5000/login', {
+      const response = await axios.post(`${process.env.REACT_APP_API_URL}/login`, {
           email,
           password
         });
 
+        // get full data
+        //console.log(response);
+        //alert(response.data.data.full_name);
         if(response.data.Loginstatus === 1){
             login();
+            const fullName = response.data.data.full_name;
+            // Set the value in localStorage
+            localStorage.setItem('fullName', fullName);
             navigate('/');
         }
-        // console.log('Response:', response.data);
 
       
     } catch (error) {
@@ -45,7 +51,6 @@ const handleSubmit = async (e) => {
         console.log(isLoggedIn);  
     }  
 };
-
 
   return (
     <div>

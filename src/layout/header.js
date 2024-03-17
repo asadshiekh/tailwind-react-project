@@ -8,14 +8,7 @@ function Header() {
 
   // alert(isLoggedIn);
 
-  const handleLogout = () => {
-    console.log('before',isLoggedIn);
-    logout(); // Call the logout function to update the isLoggedIn state
-    console.log('after',isLoggedIn);
-  };
-
-
-
+  
   return (
     <>
    <section className={`${isDarkMode ? 'bg-black' : 'bg-white'} navbar md:flex justify-between items-center py-5 hidden`}>
@@ -33,14 +26,14 @@ function Header() {
             <li className="mr-3"><Link to="/blogs">Blog</Link></li>
             <li className="mr-3"><Link to="/single-page">Posts</Link></li>
             <li className="mr-3"><Link to="/">Pages</Link></li>
-            {isLoggedIn === "1" ? (
+            {isLoggedIn ? (
               <>
-                <li className="mr-3"><Link to="/">Add Blog</Link></li>
-                <button onClick={handleLogout}>Logout</button>
+                <li className="mr-3"><Link to="/create-blog">Add Blog</Link></li>
+                <button onClick={logout}>Logout</button>
               </>
             ) : (
               <>
-                <li className="mr-3"><Link to="/contact">Register</Link></li>
+                <li className="mr-3"><Link to="/register">Register</Link></li>
                 <li className="mr-3"><Link to="/login">Login</Link></li>
               </>
             )}

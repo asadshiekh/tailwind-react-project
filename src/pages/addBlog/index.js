@@ -1,9 +1,9 @@
 import React from 'react'
-import createBlog from './createBlog'
+import CreateBlog from './createBlog'
 function index() {
   return (
     <div>
-        <createBlog/>
+        <CreateBlog/>
     </div>
   )
 }

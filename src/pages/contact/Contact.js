@@ -14,7 +14,6 @@ function Contact() {
   const [successMessage, setSuccessMessage] = useState("")
   // const { isLoggedIn, login } = useTheme();
 
-
   const handleSubmit = async (e) => {
     // console.log('Defualt State:', isLoggedIn);
     e.preventDefault();

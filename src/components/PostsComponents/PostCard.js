@@ -19,7 +19,7 @@ function PostCard({title,description,date,author,comments,post_img}) {
       </div>
       <div className='post_card_content p-4'>
         <label className='bg-blue-500 text-sm rounded p-1 inline-block mb-2 text-white'>{title}..</label>
-        <p className='text-2xl font-medium mb-4'>{description}...</p>
+        <p className='text-2xl font-medium mb-4'>{description.slice(0, 30)}...</p>
         <div className='author_banner flex items-center'>
           <div className='author_img'>
             <img src={AuthorImage} alt='author' className='rounded-full w-8 h-8 object-cover' />

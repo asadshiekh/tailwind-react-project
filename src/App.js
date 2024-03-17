@@ -40,6 +40,8 @@ import HomePage from './pages/home/Index';
 import Blog from './pages/blogs/Blog';
 import ContactUs from './pages/contact';
 import Login from './pages/loginPage';
+import AddBlog from './pages/addBlog';
+import PrivateRoute from './PrivateRoute';
 function App() {
   useEffect(() => {
     // Set cookie with SameSite=None and Secure attributes
@@ -52,8 +54,11 @@ function App() {
         <Routes>
           <Route path='/' element={<HomeLayout/>} />
           <Route path='/blogs' element={<BlogLayout/>} />
-          <Route path='/contact' element={<ContactLayout/>} />
-          <Route path='/login' element={<LoginLayout />} />
+          <Route path='/register' element={<ContactLayout/>} />
+       
+          <Route path="/create-blog" element={<PrivateRoute element={<AddBlog />}></PrivateRoute>} />   
+          <Route path='/login' element={<LoginLayout />} />         
+
           {/* {isLoggedIn === 1 ? (
           <Navigate to="/" />
         ) : (
@@ -97,6 +102,7 @@ function LoginLayout(){
     </LayoutTwo>
   )
 }
+
 
 export default App;
 
