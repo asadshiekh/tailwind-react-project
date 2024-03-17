@@ -29,7 +29,7 @@ const handleSubmit = async (e) => {
 
         // get full data
         //console.log(response);
-        //alert(response.data.data.full_name);
+        alert(response.data.data.full_name);
         if(response.data.Loginstatus === 1){
             login();
             const fullName = response.data.data.full_name;
