@@ -20,7 +20,7 @@ function Contact() {
     setLoading(true);
     setError(false);
     try {
-      const response = await axios.post('https://server-xp83.onrender.com/create-user', {
+      const response = await axios.post(`${process.env.REACT_APP_API_URL}/create-user`, {
         name,
         phone,
         email,
