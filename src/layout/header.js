@@ -23,12 +23,13 @@ function Header() {
         <div className="nav-links">
           <ul className={`${isDarkMode ? 'text-white' : 'text-black'} flex list-none`}>
             <li className="mr-3"><Link to="/">Home</Link></li>
-            <li className="mr-3"><Link to="/blogs">Blog</Link></li>
-            <li className="mr-3"><Link to="/single-page">Posts</Link></li>
+            <li className="mr-3"><Link to="/">Blog</Link></li>
+            <li className="mr-3"><Link to="/">Posts</Link></li>
             <li className="mr-3"><Link to="/">Pages</Link></li>
             {isLoggedIn ? (
               <>
                 <li className="mr-3"><Link to="/create-blog">Add Blog</Link></li>
+                <li className="mr-3"><Link to="/your-blog">Your Blog</Link></li>
                 <button onClick={logout}>Logout</button>
               </>
             ) : (

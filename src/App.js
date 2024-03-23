@@ -41,6 +41,7 @@ import Blog from './pages/blogs/Blog';
 import ContactUs from './pages/contact';
 import Login from './pages/loginPage';
 import AddBlog from './pages/addBlog';
+import UserBlog from './pages/userBlog';
 import PrivateRoute from './PrivateRoute';
 function App() {
   useEffect(() => {
@@ -56,7 +57,8 @@ function App() {
           <Route path='/blogs' element={<BlogLayout/>} />
           <Route path='/register' element={<ContactLayout/>} />
        
-          <Route path="/create-blog" element={<PrivateRoute element={<AddBlog />}></PrivateRoute>} />   
+          <Route path="/create-blog" element={<PrivateRoute element={<AddBlog />}></PrivateRoute>} />
+           <Route path="/your-blog" element={<PrivateRoute element={<UserBlog />}></PrivateRoute>} />      
           <Route path='/login' element={<LoginLayout />} />         
 
           {/* {isLoggedIn === 1 ? (

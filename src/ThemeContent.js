@@ -1,10 +1,31 @@
 import React, { createContext, useEffect, useContext, useState } from 'react';
-
+import axios from 'axios';
 const ThemeContext = createContext();
 
 export const ThemeProvider = ({ children }) => {
   const [isDarkMode, setIsDarkMode] = useState(false);
+  const [blogsContext, setBlogsContext] = useState([]);
   
+
+  const fetchData = async () => {
+    try {
+        // Simulate loading delay with setTimeout
+          const response = await axios.get(`${process.env.REACT_APP_API_URL}/get-blog`);
+          setBlogsContext(response.data);
+     
+      }  catch (error) {
+    console.error('Error fetching data: ', error);
+
+  }
+};
+
+  
+  useEffect(() => {
+      fetchData();
+    }, []);
+
+  
+
   // Simple one
   // const [isLoggedIn, setIsLoggedIn] = useState(0);
 
@@ -41,6 +62,8 @@ export const ThemeProvider = ({ children }) => {
   const logout = () => {
     localStorage.removeItem('isLoggedIn');
     localStorage.removeItem('fullName');
+    localStorage.removeItem('email');
+    localStorage.removeItem('UserID');
     setIsLoggedIn(0);
   };
  
@@ -54,7 +77,7 @@ export const ThemeProvider = ({ children }) => {
   };
 
   return (
-    <ThemeContext.Provider value={{ isDarkMode,toggleDarkMode,isLoggedIn, login, logout,setIsLoggedIn}}>
+    <ThemeContext.Provider value={{ isDarkMode,toggleDarkMode,isLoggedIn, login, logout,setIsLoggedIn,blogsContext,fetchData}}>
       {children}
     </ThemeContext.Provider>
   );

@@ -20,7 +20,8 @@ function Index() {
 
   useEffect(() => {
     // Fetch data from the API
-    fetch('https://server-xp83.onrender.com/get-blog/')
+
+    fetch(`${process.env.REACT_APP_API_URL}/get-blog/`)
       .then(response => {
         if (!response.ok) {
           throw new Error('Failed to fetch blogs');
@@ -55,10 +56,10 @@ function Index() {
             title={blog.title}
             description={blog.description}
             date={blog.date}
-            author={blog.author}
-            comments={blog.comments}
+            author={blog.user_id.full_name}
             post_img={Image1}
           />
+          {console.log(blog.user_id.full_name)}
         </div>
         ))}
 

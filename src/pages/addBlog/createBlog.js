@@ -1,6 +1,8 @@
 import React, {useState } from 'react'
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import { useTheme } from '../../ThemeContent';
+
 function CreateBlog() {
 
 const [title, setTitle] = useState("");
@@ -8,24 +10,26 @@ const [description, setDescription] = useState("");
 const [loading, setLoading] = useState(false);
 const [error, setError] = useState(false);
 const [error_message, setErrorMessage] = useState("");
-
+const {fetchData } = useTheme();
 
   const handleSubmit = async (e) => {
        e.preventDefault();
        setLoading(true);
-      const fullname = localStorage.getItem('fullName');
+      const user_id = localStorage.getItem('UserID');
       try {
-        const response = await axios.post(`${process.env.REACT_APP_API_URL}/create-blog1`, {
+         await axios.post(`${process.env.REACT_APP_API_URL}/create-blog1`, {
             title,
             description,
-            fullname,
+            user_id,
           });
+
+          fetchData();
   
           // get full data
           //console.log(response.data);
-          if(response.data.Loginstatus === 1){
-
-          }
+          // if(response.data.Loginstatus === 1){
+    
+          // }
   
         
       } catch (error) {
@@ -44,7 +48,7 @@ const [error_message, setErrorMessage] = useState("");
   return (
     <div>
       <div className="navbar flex justify-center bg-base-100">
-          <Link to='/' className="btn btn-ghost text-xl">MetaBlog</Link>
+          <Link to='/' className="text-xl">MetaBlog</Link>
       </div>
 
       <div className="hero min-h-screen bg-base-200">

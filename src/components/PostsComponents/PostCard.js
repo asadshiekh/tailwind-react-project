@@ -1,7 +1,7 @@
 import React from 'react';
 import AuthorImage from '../../assets/author.png';
 
-function PostCard({title,description,date,author,comments,post_img}) {
+function PostCard({title,description,date,author,post_img}) {
 
   const formattedDate = new Date(date).toLocaleDateString('en-US', {
     year: 'numeric',

@@ -33,8 +33,12 @@ const handleSubmit = async (e) => {
         if(response.data.Loginstatus === 1){
             login();
             const fullName = response.data.data.full_name;
+            const UserEmail = response.data.data.email;
+            const UserId = response.data.data._id;
             // Set the value in localStorage
             localStorage.setItem('fullName', fullName);
+            localStorage.setItem('Email', UserEmail);
+            localStorage.setItem('UserID', UserId);
             navigate('/');
         }
 
@@ -115,9 +119,7 @@ const handleSubmit = async (e) => {
                 </button>
                 <p className="text-sm text-center font-light text-gray-500 dark:text-gray-400">
                 
-                {/* {isLoggedIn ? 'Already have an account?{" "}' : ''} */}
-                
-                  <Link to="/contact" className="font-medium text-primary-600 hover:underline dark:text-primary-500"
+                  <Link to="/register" className="font-medium text-primary-600 hover:underline dark:text-primary-500"
                   >Did not have an Account</Link>
                 </p>
                   {loading && <p className='font-medium text-center'>Loading...</p>}
