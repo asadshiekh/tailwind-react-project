@@ -8,6 +8,11 @@ function UserBlog() {
      const [getBlogs, setUserBlog] = useState([]);
      const [error, setError] = useState(null);
     // const {blogsContext} = useTheme();
+    const [postIdToDelete, setPostIdToDelete] = useState(null);
+
+    const [postId, setPostId] = useState(null);
+    const [editPostTitle, setEditPostTitle] = useState(' ');
+    const [editPostDescription, setEditPostDescription] = useState(' ');
 
 useEffect(() => {
   const fetchData = async () => { // Define an async function
@@ -26,6 +31,73 @@ useEffect(() => {
   fetchData(); // Call the async function
 
 }, []); // Empty dependency array to run only once on component mount
+
+  // Function to set the post ID to delete and open the modal
+  const handleDeleteConfirmation = (postId) => {
+    setPostIdToDelete(postId);
+    document.getElementById('my_modal_1').showModal();
+  };
+
+  const handleEditConfirmation = (postId,title,description) =>{
+
+    console.log("Post id:",postId);
+    console.log("title:",title);
+    console.log("description:",description);
+
+    setPostId(postId);
+    setEditPostTitle(title);
+    setEditPostDescription(description);
+    document.getElementById('my_modal_2').showModal();
+
+  }
+
+  const deletePost = async () => {
+    try {
+      console.log(postIdToDelete);
+      if (postIdToDelete) {
+        // Make DELETE request to your API endpoint to delete the post
+        await axios.delete(`${process.env.REACT_APP_API_URL}/delete-post/${postIdToDelete}`);
+        // Remove the deleted post from the state
+        setUserBlog(prevState => prevState.filter(post => post._id !== postIdToDelete));
+        // Close the modal after deletion
+        document.getElementById('my_modal_1').close();
+      }
+    } catch (error) {
+      console.error('Error deleting post: ', error);
+    }
+  };
+
+  const editPostSubmit = async ()=>{
+    try {
+      // console.log(postIdToDelete);
+      if (postId != null) {
+        // Make DELETE request to your API endpoint to delete the post
+      
+        await axios.put(`${process.env.REACT_APP_API_URL}/update-blog/${postId}`, {
+          editPostTitle,
+          editPostDescription,
+          postId,
+        });
+
+        const updatedBlogs = getBlogs.map(blog => {
+          if (blog._id === postId) {
+            return { ...blog, title: editPostTitle, description: editPostDescription };
+          }
+          return blog;
+        });
+        setUserBlog(updatedBlogs);
+
+        // Remove the deleted post from the state
+        // setUserBlog(prevState => prevState.filter(post => post._id !== postIdToDelete));
+        // Close the modal after deletion
+        
+        document.getElementById('my_modal_2').close();
+      }
+    } catch (error) {
+      console.error('unable to update post: ', error);
+    }
+
+  }
 
 return (
     <div>
@@ -47,6 +119,7 @@ return (
               <th>Blog Name</th>
               <th>Blog Description</th>
               <th>Author</th>
+              <th>Action</th>
             </tr>
           </thead>
           <tbody>
@@ -55,6 +128,8 @@ return (
                 <th>{blog.title}</th>
                 <td>{blog.description.slice(0, 10)}</td>
                 <td>{blog.user_id.full_name}</td>
+                <td><input type="button" value="Edit" onClick={() => handleEditConfirmation(blog._id,blog.title,blog.description)}  class="btn" />    <input type="button" onClick={() => handleDeleteConfirmation(blog._id)} value="Delete" className="btn" />
+            </td>
               </tr>
             ))}
           </tbody>
@@ -97,8 +172,48 @@ return (
             <a href='/'><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" className="fill-current"><path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"></path></svg></a>
             </div>
         </nav>
-        </footer>  
+        </footer>
+
+
+<dialog id="my_modal_1" className="modal">
+  <div className="modal-box">
+    <h3 className="font-bold text-lg">Confirmation</h3>
+    <div className="modal-action">
+      <form method="dialog">
+          <div role="alert" className="alert">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" className="stroke-info shrink-0 w-6 h-6"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+          <span>Are you sure you want to delete this post?</span>
+          <div>
+            <button onClick={deletePost} className="btn btn-sm">Confirm</button>
+            <button className="btn btn-sm">Close</button>
+          </div>
+        </div>
+   
+      </form>
     </div>
+  </div>
+</dialog>
+
+
+<dialog id="my_modal_2" className="modal">
+  <div className="modal-box">
+    <h3 className="font-bold text-lg">Confirmation</h3>
+    <div className="modal-action">
+      <form method="dialog">
+              
+      <input type="text" placeholder="Enter Title" onChange={(e) => setEditPostTitle(e.target.value)}  value={editPostTitle} className="input input-bordered" />
+      <input type="text" placeholder="Enter Description" onChange={(e) => setEditPostDescription(e.target.value)} value={editPostDescription} className="input input-bordered" />  
+        
+          <div className='text-right mt-5'>
+            <button onClick={editPostSubmit} className="btn btn-sm">Confirm</button>
+            <button className="btn btn-sm">Close</button>
+          </div>
+        
+      </form>
+    </div>
+  </div>
+</dialog>
+</div>
   )
 }
 

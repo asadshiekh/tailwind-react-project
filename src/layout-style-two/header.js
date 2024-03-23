@@ -20,9 +20,9 @@ function Header() {
         <div className="nav-links">
           <ul className={`${isDarkMode ? 'text-white' : 'text-black'} flex list-none`}>
             <li className="mr-5"><Link to="/">Home</Link></li>
-            <li className="mr-5"><Link to="/">Blog</Link></li>
+            {/* <li className="mr-5"><Link to="/">Blog</Link></li>
             <li className="mr-5"><Link to="/">Single Post</Link></li>
-            <li className="mr-5"><Link to="/">Pages</Link></li>
+            <li className="mr-5"><Link to="/">Pages</Link></li> */}
             <li><Link to="/contact">Contact</Link></li>
           </ul>
         </div>
